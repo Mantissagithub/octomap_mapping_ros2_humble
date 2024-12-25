@@ -42,7 +42,7 @@ OctomapServerStatic::OctomapServerStatic(const rclcpp::NodeOptions & node_option
   using std::placeholders::_1;
   using std::placeholders::_2;
 
-  frame_id_ = declare_parameter("frame_id", "map");
+  frame_id_ = declare_parameter("frame_id", "camera_depth_optical_frame");
   const auto filename = declare_parameter("octomap_path", "");
   if (filename.length() <= 3) {
     RCLCPP_ERROR(get_logger(), "Octree file does not have .ot extension");

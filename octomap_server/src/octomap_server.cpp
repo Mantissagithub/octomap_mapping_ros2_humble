@@ -61,7 +61,7 @@ OctomapServer::OctomapServer(const rclcpp::NodeOptions & node_options)
   using std::placeholders::_1;
   using std::placeholders::_2;
 
-  world_frame_id_ = declare_parameter("frame_id", "map");
+  world_frame_id_ = declare_parameter("frame_id", "camera_depth_optical_frame");
   base_frame_id_ = declare_parameter("base_frame_id", "base_footprint");
   use_height_map_ = declare_parameter("use_height_map", false);
   use_colored_map_ = declare_parameter("colored_map", false);
@@ -806,7 +806,7 @@ void OctomapServer::publishAll(const rclcpp::Time & rostime)
 
       occupied_nodes_vis.markers[i].header.frame_id = world_frame_id_;
       occupied_nodes_vis.markers[i].header.stamp = rostime;
-      occupied_nodes_vis.markers[i].ns = "map";
+      occupied_nodes_vis.markers[i].ns = "camera_depth_optical_frame";
       occupied_nodes_vis.markers[i].id = i;
       occupied_nodes_vis.markers[i].type = visualization_msgs::msg::Marker::CUBE_LIST;
       occupied_nodes_vis.markers[i].scale.x = size;
@@ -835,7 +835,7 @@ void OctomapServer::publishAll(const rclcpp::Time & rostime)
 
       free_nodes_vis.markers[i].header.frame_id = world_frame_id_;
       free_nodes_vis.markers[i].header.stamp = rostime;
-      free_nodes_vis.markers[i].ns = "map";
+      free_nodes_vis.markers[i].ns = "camera_depth_optical_frame";
       free_nodes_vis.markers[i].id = i;
       free_nodes_vis.markers[i].type = visualization_msgs::msg::Marker::CUBE_LIST;
       free_nodes_vis.markers[i].scale.x = size;
@@ -951,7 +951,7 @@ bool OctomapServer::resetSrv(
   for (size_t i = 0; i < occupied_nodes_vis.markers.size(); ++i) {
     occupied_nodes_vis.markers[i].header.frame_id = world_frame_id_;
     occupied_nodes_vis.markers[i].header.stamp = rostime;
-    occupied_nodes_vis.markers[i].ns = "map";
+    occupied_nodes_vis.markers[i].ns = "camera_depth_optical_frame";
     occupied_nodes_vis.markers[i].id = i;
     occupied_nodes_vis.markers[i].type = visualization_msgs::msg::Marker::CUBE_LIST;
     occupied_nodes_vis.markers[i].action = visualization_msgs::msg::Marker::DELETE;
@@ -965,7 +965,7 @@ bool OctomapServer::resetSrv(
   for (size_t i = 0; i < free_nodes_vis.markers.size(); ++i) {
     free_nodes_vis.markers[i].header.frame_id = world_frame_id_;
     free_nodes_vis.markers[i].header.stamp = rostime;
-    free_nodes_vis.markers[i].ns = "map";
+    free_nodes_vis.markers[i].ns = "camera_depth_optical_frame";
     free_nodes_vis.markers[i].id = i;
     free_nodes_vis.markers[i].type = visualization_msgs::msg::Marker::CUBE_LIST;
     free_nodes_vis.markers[i].action = visualization_msgs::msg::Marker::DELETE;
